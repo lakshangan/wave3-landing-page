@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import TiltedCard from "./TiltedCard";
 
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
@@ -1976,7 +1977,7 @@ export default function Wave3Landing() {
                       width="100%"
                       height="100%"
                       style={{ background: "transparent" }}
-                      allowTransparency={true}
+                      
                     />
                   </Suspense>
                 </motion.div>
@@ -2175,9 +2176,50 @@ export default function Wave3Landing() {
           <motion.p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base" whileHover={{ scale: 1.01 }}>
             People behind Wave3
           </motion.p>
+            <div className="flex flex-col md:flex-row justify-center items-center gap-8 my-8">
+              {/* Demo TiltedCard for Kendrick Lamar - GNX */}
+              <TiltedCard
+                imageSrc="/ansar.png"
+                altText="Ansar Hussain A - CEO & Founder"
+                captionText="Ansar "
+                containerHeight="300px"
+                containerWidth="300px"
+                imageHeight="300px"
+                imageWidth="300px"
+                rotateAmplitude={12}
+                scaleOnHover={1.2}
+                showMobileWarning={false}
+                showTooltip={true}
+                displayOverlayContent={true}
+                overlayContent={
+                  <p className="tilted-card-demo-text">
+                    Ansar Hussain A - CEO & Founder
+                  </p>
+                }
+              />
+              {/* Second TiltedCard for another album */}
+              <TiltedCard
+                imageSrc="/pareekshit.png"
+                altText="Pareekshith P - CTO & Co-Founder"
+                captionText="Pareekshith P - CTO & Co-Founder"
+                containerHeight="300px"
+                containerWidth="300px"
+                imageHeight="300px"
+                imageWidth="300px"
+                rotateAmplitude={10}
+                scaleOnHover={1.15}
+                showMobileWarning={false}
+                showTooltip={true}
+                displayOverlayContent={true}
+                overlayContent={
+                  <p className="tilted-card-demo-text">
+Pareekshith P - CTO & Co-Founder                  </p>
+                }
+              />
+            </div>
               </motion.div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
                   {
                     name: "Pareekshith P",
@@ -2203,7 +2245,7 @@ export default function Wave3Landing() {
                     index={index}
                   />
                 ))}
-              </div>
+              </div> */}
             </div>
           </section>
 
