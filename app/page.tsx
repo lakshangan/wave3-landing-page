@@ -1,6 +1,14 @@
 "use client"
 
 import type React from "react"
+import LogoLoop from "../components/LogoLoop";
+import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/si";
+  const techLogos = [
+    { node: <SiReact />, title: "React", href: "https://react.dev" },
+    { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
+    { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
+    { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+  ];
 import TiltedCard from "./TiltedCard";
 
 import { Textarea } from "@/components/ui/textarea"
@@ -681,18 +689,35 @@ function WebsiteCreationStudio() {
         </motion.div>
 
         {/* Tech Stack */}
+        {/* LogoLoop above Tech Stack */}
+        <div className="mb-12 flex justify-center">
+          <div style={{ height: '72px', width: '100%', maxWidth: '900px', position: 'relative', overflow: 'hidden' }}>
+            <LogoLoop
+              logos={techLogos}
+              speed={120}
+              direction="left"
+              logoHeight={48}
+              gap={40}
+              pauseOnHover
+              scaleOnHover
+              fadeOut
+              fadeOutColor="#ffffff"
+              ariaLabel="Technology partners"
+            />
+          </div>
+        </div>
         <motion.div
           className="mb-20"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <div className="text-center mb-12">
+          {/* <div className="text-center mb-12">
             <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Powered by Modern Technology</h3>
             <p className="text-gray-600 dark:text-gray-300 text-lg">We use the latest and most reliable technologies</p>
-          </div>
+          </div> */}
 
-          <div className="flex flex-wrap justify-center gap-6">
+          {/* <div className="flex flex-wrap justify-center gap-6">
             {techStack.map((tech, index) => (
               <motion.div
                 key={tech.name}
@@ -706,7 +731,7 @@ function WebsiteCreationStudio() {
                 <span className={`font-semibold ${tech.color}`}>{tech.name}</span>
               </motion.div>
             ))}
-          </div>
+          </div> */}
         </motion.div>
 
         {/* Call to Action */}
@@ -772,546 +797,6 @@ function WebsiteCreationStudio() {
     </section>
   )
 }
-
-// Visual Design & Poster Creation Component
-function VisualDesignPosterCreation() {
-  const [activeStep, setActiveStep] = useState(0)
-  const [isCreating, setIsCreating] = useState(false)
-  const [selectedStyle, setSelectedStyle] = useState("modern")
-  const [hoveredPoster, setHoveredPoster] = useState<number | null>(null)
-
-  const creationSteps = [
-    { id: 0, title: "Concept", icon: "💡", description: "We brainstorm your vision" },
-    { id: 1, title: "Design", icon: "🎨", description: "Crafting visual magic" },
-    { id: 2, title: "Refine", icon: "✨", description: "Perfecting every detail" },
-    { id: 3, title: "Deliver", icon: "🚀", description: "Your stunning poster ready" },
-  ]
-
-  const posterStyles = [
-    { id: "modern", label: "Modern", gradient: "from-blue-500 via-purple-500 to-pink-500" },
-    { id: "vintage", label: "Vintage", gradient: "from-amber-500 via-orange-500 to-red-500" },
-    { id: "minimal", label: "Minimal", gradient: "from-gray-600 via-gray-500 to-gray-400" },
-    { id: "vibrant", label: "Vibrant", gradient: "from-green-400 via-blue-500 to-purple-600" },
-  ]
-
-  const showcasePosters = [
-    {
-      id: 1,
-      title: "Hack Beyond Limits ",
-      category: "Hackathon",
-      style: "modern",
-      src: "/images/posters/hackathon.jpg",
-      gradient: "from-cyan-400 via-blue-500 to-purple-600",
-      // impact: "+300% Attendance",
-      // client: "TechCorp",
-    },
-    {
-      id: 2,
-      title: "Food Festival",
-      category: "Culinary",
-      style: "vibrant",
-      gradient: "from-orange-400 via-red-500 to-pink-500",
-      // impact: "+250% Sales",
-      client: "FoodHub",
-    },
-    {
-      id: 3,
-      title: "Art Exhibition",
-      category: "Culture",
-      style: "minimal",
-      gradient: "from-slate-600 via-gray-600 to-zinc-700",
-      // impact: "+400% Visitors",
-      client: "Gallery X",
-    },
-    {
-      id: 4,
-      title: "Music Festival",
-      category: "Entertainment",
-      style: "vintage",
-      gradient: "from-yellow-500 via-orange-500 to-red-600",
-      // impact: "Sold Out",
-      client: "MusicLive",
-    },
-  ]
-
-  useEffect(() => {
-    if (isCreating) {
-      const interval = setInterval(() => {
-        setActiveStep((prev) => (prev + 1) % creationSteps.length)
-      }, 2000)
-      return () => clearInterval(interval)
-    }
-  }, [isCreating, creationSteps.length])
-
-  return (
-    <section className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-indigo-950 dark:via-gray-950 dark:to-purple-950">
-      {/* Floating Creative Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(25)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              x: [0, Math.random() * 100 - 50, Math.random() * 80 - 40, 0],
-              y: [0, Math.random() * 100 - 50, Math.random() * 80 - 40, 0],
-              rotate: [0, 180, 360],
-              scale: [0.5, 1.2, 0.8, 0.5],
-              opacity: [0.1, 0.6, 0.3, 0.1],
-            }}
-            transition={{
-              duration: 12 + i * 0.5,
-              repeat: Number.POSITIVE_INFINITY,
-              delay: i * 0.3,
-              ease: "easeInOut",
-            }}
-          >
-            {["🎨", "✨", "🚀", "💫", "🎯", "⭐", "🔥", "💎"][i % 8]}
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="container mx-auto max-w-7xl relative z-10">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <motion.div
-            className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-100 via-blue-100 to-indigo-100 border-2 border-purple-200 mb-8"
-            whileHover={{ scale: 1.05, y: -3 }}
-            animate={{
-              boxShadow: [
-                "0 0 20px rgba(147, 51, 234, 0.3)",
-                "0 0 40px rgba(59, 130, 246, 0.4)",
-                "0 0 20px rgba(147, 51, 234, 0.3)",
-              ],
-            }}
-            transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
-          >
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-            >
-              🎨
-            </motion.div>
-            <span className="text-lg font-semibold text-purple-700 ml-3">Visual Design & Poster Creation</span>
-          </motion.div>
-
-          <motion.h2
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
-            whileHover={{ scale: 1.02 }}
-          >
-            <span className="text-gray-900 dark:text-white">We Create</span>
-            <br />
-            <motion.span
-              className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 dark:from-purple-400 dark:via-blue-400 dark:to-indigo-400 bg-clip-text text-transparent"
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY }}
-            >
-              Stunning Posters
-            </motion.span>
-            <br />
-            <span className="text-gray-900 dark:text-white">For Your Business</span>
-          </motion.h2>
-
-          <motion.p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed" whileHover={{ scale: 1.01 }}>
-            Transform your ideas into eye-catching visual masterpieces that captivate audiences, drive engagement, and
-            boost your business impact with our creative poster design expertise.
-          </motion.p>
-        </motion.div>
-
-        {/* Interactive Creation Process */}
-        <motion.div
-          className="mb-20"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          {/* <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">Our Creative Process</h3>
-            <motion.button
-              onClick={() => setIsCreating(!isCreating)}
-              className={`px-8 py-4 rounded-full font-semibold text-lg transition-all ${
-                isCreating
-                  ? "bg-gradient-to-r from-red-500 to-pink-500 text-white shadow-lg"
-                  : "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg hover:shadow-xl"
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {isCreating ? "⏸️ Pause Process" : "▶️ Watch Magic Happen"}
-            </motion.button>
-          </div> */}
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {creationSteps.map((step, index) => (
-              <motion.div
-                key={step.id}
-                className={`relative p-6 rounded-2xl border-2 transition-all duration-500 ${
-                  activeStep === index && isCreating
-                    ? "bg-gradient-to-br from-purple-100 to-blue-100 border-purple-400 shadow-xl scale-105"
-                    : "bg-white border-gray-200 hover:border-purple-300"
-                }`}
-                whileHover={{ y: -5, scale: 1.02 }}
-                animate={
-                  activeStep === index && isCreating
-                    ? {
-                        boxShadow: [
-                          "0 0 20px rgba(147, 51, 234, 0.4)",
-                          "0 0 40px rgba(147, 51, 234, 0.6)",
-                          "0 0 20px rgba(147, 51, 234, 0.4)",
-                        ],
-                      }
-                    : {}
-                }
-                transition={{ duration: 1 }}
-              >
-                <motion.div
-                  className="text-4xl mb-4 text-center"
-                  animate={
-                    activeStep === index && isCreating
-                      ? { scale: [1, 1.3, 1], rotate: [0, 10, -10, 0] }
-                      : { scale: 1, rotate: 0 }
-                  }
-                  transition={{ duration: 0.5 }}
-                >
-                  {step.icon}
-                </motion.div>
-                <h4 className="text-xl font-bold text-gray-900 mb-2 text-center">{step.title}</h4>
-                <p className="text-gray-600 text-center">{step.description}</p>
-
-                {/* Progress indicator */}
-                {index < creationSteps.length - 1 && (
-                  <motion.div
-                    className="absolute -right-4 top-1/2 w-8 h-0.5 bg-gradient-to-r from-purple-400 to-blue-400 hidden md:block"
-                    initial={{ scaleX: 0 }}
-                    animate={{
-                      scaleX: isCreating && activeStep > index ? 1 : 0,
-                    }}
-                    transition={{ duration: 0.5 }}
-                  />
-                )}
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Style Selector */}
-        <motion.div
-          className="mb-20"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Choose Your Style</h3>
-            <p className="text-gray-600 dark:text-gray-300 text-lg">Select a style to see our poster magic in action</p>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {posterStyles.map((style) => (
-              <motion.button
-                key={style.id}
-                onClick={() => setSelectedStyle(style.id)}
-                className={`px-6 py-3 rounded-full font-semibold transition-all ${
-                  selectedStyle === style.id
-                    ? `bg-gradient-to-r ${style.gradient} text-white shadow-lg`
-                    : "bg-white border-2 border-gray-200 text-gray-700 hover:border-purple-300"
-                }`}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {style.label}
-              </motion.button>
-            ))}
-          </div>
-
-          {/* Live Preview */}
-          <motion.div
-            className="max-w-md mx-auto"
-            key={selectedStyle}
-            initial={{ opacity: 0, scale: 0.8, rotateY: 90 }}
-            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-            transition={{ duration: 0.6, type: "spring" }}
-          >
-            <div
-              className={`h-80 rounded-2xl bg-gradient-to-br ${
-                posterStyles.find((s) => s.id === selectedStyle)?.gradient
-              } relative overflow-hidden shadow-2xl`}
-            >
-              {/* Animated design elements */}
-              <motion.div
-                className="absolute inset-0 opacity-20"
-                animate={{
-                  background: [
-                    "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4) 0%, transparent 50%)",
-                    "radial-gradient(circle at 80% 80%, rgba(255,255,255,0.4) 0%, transparent 50%)",
-                    "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.4) 0%, transparent 50%)",
-                    "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4) 0%, transparent 50%)",
-                  ],
-                }}
-                transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY }}
-              />
-
-              {/* Floating elements */}
-              {[...Array(8)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute bg-white/30 rounded-full"
-                  style={{
-                    width: Math.random() * 30 + 10,
-                    height: Math.random() * 30 + 10,
-                    left: `${20 + i * 10}%`,
-                    top: `${20 + (i % 3) * 25}%`,
-                  }}
-                  animate={{
-                    y: [0, -30, 0],
-                    x: [0, 15, 0],
-                    scale: [1, 1.3, 1],
-                    opacity: [0.3, 0.8, 0.3],
-                  }}
-                  transition={{
-                    duration: 3 + i * 0.5,
-                    repeat: Number.POSITIVE_INFINITY,
-                    delay: i * 0.2,
-                  }}
-                />
-              ))}
-
-              {/* Poster content mockup */}
-              <div className="absolute inset-0 p-8 flex flex-col justify-between text-white">
-                <motion.div
-                  className="text-right"
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-                >
-                  <div className="w-12 h-12 bg-white/30 rounded-full ml-auto mb-4"></div>
-                  <div className="w-20 h-2 bg-white/50 rounded ml-auto"></div>
-                </motion.div>
-
-                <motion.div
-                  animate={{ y: [0, -5, 0] }}
-                  transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: 0.5 }}
-                >
-                  <div className="w-3/4 h-3 bg-white/70 rounded mb-3"></div>
-                  <div className="w-1/2 h-3 bg-white/50 rounded mb-6"></div>
-                  <div className="w-24 h-8 bg-white/90 rounded"></div>
-                </motion.div>
-              </div>
-
-              {/* Style label */}
-              <motion.div
-                className="absolute top-4 left-4 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium"
-                whileHover={{ scale: 1.1 }}
-              >
-                {posterStyles.find((s) => s.id === selectedStyle)?.label} Style
-              </motion.div>
-            </div>
-          </motion.div>
-        </motion.div>
-
-        {/* Success Stories Showcase */}
-        <motion.div
-          className="mb-20"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Success Stories</h3>
-            <p className="text-gray-600 dark:text-gray-300 text-lg">Real results from our stunning poster designs</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {showcasePosters.map((poster, index) => (
-              <motion.div
-                key={poster.id}
-                className="group cursor-pointer"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                onHoverStart={() => setHoveredPoster(poster.id)}
-                onHoverEnd={() => setHoveredPoster(null)}
-              >
-                <div className="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-900 shadow-lg hover:shadow-2xl transition-all duration-300">
-                  {/* Poster preview */}
-                  <div className={`h-64 bg-gradient-to-br ${poster.gradient} relative overflow-hidden`}>
-                    {/* Animated background */}
-                    <motion.div
-                      className="absolute inset-0 opacity-30"
-                      animate={
-                        hoveredPoster === poster.id
-                          ? {
-                              background: [
-                                "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, transparent 60%)",
-                                "radial-gradient(circle at 70% 70%, rgba(255,255,255,0.4) 0%, transparent 60%)",
-                                "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, transparent 60%)",
-                              ],
-                            }
-                          : {}
-                      }
-                      transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-                    />
-
-                    {/* Success impact badge */}
-                    <motion.div
-                      className="absolute top-4 right-4 px-3 py-1 bg-green-500 text-white rounded-full text-xs font-bold"
-                      animate={
-                        hoveredPoster === poster.id
-                          ? { scale: [1, 1.2, 1], rotate: [0, 5, -5, 0] }
-                          : { scale: 1, rotate: 0 }
-                      }
-                      transition={{ duration: 0.5 }}
-                    >
-                      {poster.impact}
-                    </motion.div>
-
-                    {/* Poster mockup content */}
-                    <div className="absolute inset-0 p-6 flex flex-col justify-between text-white">
-                      <motion.div
-                        animate={hoveredPoster === poster.id ? { scale: 1.1, rotate: 2 } : { scale: 1, rotate: 0 }}
-                      >
-                        <div className="w-8 h-8 bg-white/30 rounded-full mb-2"></div>
-                        <div className="w-16 h-1 bg-white/50 rounded"></div>
-                      </motion.div>
-
-                      <motion.div animate={hoveredPoster === poster.id ? { y: -5 } : { y: 0 }}>
-                        <div className="w-3/4 h-2 bg-white/70 rounded mb-2"></div>
-                        <div className="w-1/2 h-2 bg-white/50 rounded mb-4"></div>
-                        <div className="w-20 h-6 bg-white/90 rounded"></div>
-                      </motion.div>
-                    </div>
-
-                    {/* Hover overlay */}
-                    <motion.div
-                      className="absolute inset-0 bg-black/20 flex items-center justify-center"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: hoveredPoster === poster.id ? 1 : 0 }}
-                    >
-                      <motion.div
-                        className="bg-white/90 backdrop-blur-sm rounded-full p-4"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: hoveredPoster === poster.id ? 1 : 0 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                      >
-                        <Eye className="h-6 w-6 text-gray-700" />
-                      </motion.div>
-                    </motion.div>
-                  </div>
-
-                  {/* Poster info */}
-                  <div className="p-6">
-                    <div className="flex items-start justify-between mb-3">
-                      <div>
-                        <motion.h4 className="font-bold text-gray-900 dark:text-white mb-1" whileHover={{ x: 5 }}>
-                          {poster.title}
-                        </motion.h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">{poster.category}</p>
-                      </div>
-                      <motion.span
-                        className="text-xs bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 px-2 py-1 rounded-full"
-                        whileHover={{ scale: 1.1 }}
-                      >
-                        {poster.style}
-                      </motion.span>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <motion.div className="text-sm text-gray-500 dark:text-gray-400" whileHover={{ scale: 1.05 }}>
-                        Client: <span className="font-medium text-gray-700 dark:text-gray-300">{poster.client}</span>
-                      </motion.div>
-                      <motion.div className="flex items-center space-x-1" whileHover={{ scale: 1.1 }}>
-                        <motion.div
-                          animate={{ scale: [1, 1.3, 1] }}
-                          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-                        >
-                          🔥
-                        </motion.div>
-                        <span className="text-sm font-medium text-orange-600 dark:text-orange-400">Hot</span>
-                      </motion.div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Call to Action */}
-        <motion.div
-          className="text-center"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-        >
-          <motion.div
-            className="bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-600 rounded-3xl p-12 text-white relative overflow-hidden"
-            whileHover={{ scale: 1.02 }}
-          >
-            {/* Background animation */}
-            <motion.div
-              className="absolute inset-0 opacity-20"
-              animate={{
-                background: [
-                  "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.3) 0%, transparent 50%)",
-                  "radial-gradient(circle at 80% 80%, rgba(255,255,255,0.3) 0%, transparent 50%)",
-                  "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.3) 0%, transparent 50%)",
-                  "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.3) 0%, transparent 50%)",
-                ],
-              }}
-              transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY }}
-            />
-
-            <div className="relative z-10">
-              <motion.h3
-                className="text-4xl font-bold mb-4"
-                animate={{ scale: [1, 1.02, 1] }}
-                transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
-              >
-                Ready to Create Your Stunning Poster?
-              </motion.h3>
-              <p className="text-xl mb-8 opacity-90">
-                Let's transform your vision into a visual masterpiece that drives real results for your business.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button className="bg-white text-purple-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-full shadow-lg">
-                    🚀 Start Your Poster Project
-                  </Button>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                   <Button
-                    variant="outline"
-                    className="border-blue-500 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/50 px-8 py-4 text-lg font-semibold rounded-full"
-                  >
-📞 Get Free Consultation                  </Button> 
-
-                </motion.div>
-              </div>
-               
-
-
-              <motion.p className="text-sm mt-6 opacity-80" whileHover={{ scale: 1.02 }}>
-                ⚡ 24-48 hour delivery • 🎨 Unlimited revisions • 
-              </motion.p>
-            </div>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
-  )
-}
-
 // Animated Counter with enhanced styling
 function AnimatedCounter({ end, duration = 2, suffix = "" }: { end: number; duration?: number; suffix?: string }) {
   const ref = useRef(null)
@@ -1783,7 +1268,7 @@ export default function Wave3Landing() {
     <>
       <AnimatePresence>{loading && <EnhancedPreloader onComplete={() => setLoading(false)} />}</AnimatePresence>
 
-      <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 overflow-x-hidden relative">
+  <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 overflow-x-hidden relative">
         {/* Enhanced Background */}
         <EnhancedBackground />
 
@@ -2075,6 +1560,11 @@ export default function Wave3Landing() {
                       "Creative visual designs, posters, and branding materials that captivate audiences and communicate your message effectively.",
                     features: ["Poster Design", "Brand Identity", "Digital Art", "Print Materials"],
                   },
+                   {
+                    title: "Videography and Editing",
+                    description:"At Wave3, we work with skilled videographers and editors within our network. We connect you with the right creatives to produce high-quality videos tailored to your brand.",
+                    features: [ "Social Media Editing"],
+                  },
                 ].map((service, index) => (
                   <EnhancedServiceCard
                     key={index}
@@ -2159,7 +1649,6 @@ export default function Wave3Landing() {
           <WebsiteCreationStudio />
 
           {/* Visual Design Studio */}
-          <VisualDesignPosterCreation />
 
           {/* Enhanced Testimonials Section */}
           <section className="py-16 sm:py-24 px-4 sm:px-6 bg-gradient-to-br from-indigo-50/30 to-blue-50/20 dark:from-indigo-950/30 dark:to-blue-950/20">
@@ -2280,8 +1769,8 @@ Pareekshith P - CTO & Co-Founder                  </p>
                     </motion.h3>
                     <div className="space-y-4">
                       {[
-                        { icon: <Mail className="h-4 w-4" />, text: "hello@wave3.agency", color: "text-blue-600 dark:text-blue-400" },
-                        { icon: <Phone className="h-4 w-4" />, text: "+1 (555) 123-WAVE", color: "text-indigo-600 dark:text-indigo-400" },
+                        { icon: <Mail className="h-4 w-4" />, text: "wave3devs@gmail.com", color: "text-blue-600 dark:text-blue-400" },
+                        { icon: <Phone className="h-4 w-4" />, text: "+91 93441 22601", color: "text-indigo-600 dark:text-indigo-400" },
                         {
                           icon: <MapPin className="h-4 w-4" />,
                           text: "Remote & Worldwide",

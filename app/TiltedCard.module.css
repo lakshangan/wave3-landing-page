@@ -1,0 +1,63 @@
+/* Converted to CSS module for Next.js compatibility */
+.tiltedCardFigure {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tiltedCardMobileAlert {
+  position: absolute;
+  top: 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .tiltedCardMobileAlert {
+    display: block;
+  }
+  .tiltedCardCaption {
+    display: none;
+  }
+}
+
+.tiltedCardInner {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.tiltedCardImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  border-radius: 15px;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.tiltedCardOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  will-change: transform;
+  transform: translateZ(30px);
+}
+
+.tiltedCardCaption {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 4px;
+  background-color: #fff;
+  padding: 4px 10px;
+  font-size: 10px;
+}
