@@ -13,7 +13,7 @@ import TiltedCard from "./TiltedCard";
 
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import { Button as UIButton } from "@/components/ui/button"
 import { useRef, useState, useEffect, Suspense } from "react"
 import Spline from "@splinetool/react-spline";
 import { motion, AnimatePresence, useScroll, useSpring, useTransform } from "framer-motion"
@@ -688,24 +688,100 @@ function WebsiteCreationStudio() {
           </motion.div>
         </motion.div>
 
-        {/* Tech Stack */}
-        {/* LogoLoop above Tech Stack */}
-        <div className="mb-12 flex justify-center">
-          <div style={{ height: '72px', width: '100%', maxWidth: '900px', position: 'relative', overflow: 'hidden' }}>
-            <LogoLoop
-              logos={techLogos}
-              speed={120}
-              direction="left"
-              logoHeight={48}
-              gap={40}
-              pauseOnHover
-              scaleOnHover
-              fadeOut
-              fadeOutColor="#ffffff"
-              ariaLabel="Technology partners"
-            />
-          </div>
+        {/* Web Gallery Section */}
+      {/* Web Gallery Section */}
+      <motion.section
+        className="w-full py-16 sm:py-24 px-4 sm:px-6 bg-transparent"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+      >
+        <div className="container mx-auto max-w-6xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12 sm:mb-16"
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Website Showcase
+            </h2>
+            <p className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto">
+              A minimalist gallery of websites we’ve crafted with creativity and precision.
+            </p>
+          </motion.div>
+
+          {(() => {
+            const projects = [
+              { src: "/bayan.png", href: "https://banyangrowtokentest.vercel.app/" },
+              { src: "/jayam.png", href: "https://jayaminstitute.vercel.app/" },
+              { src: "/hackbeyondlimitsv1.png", href: "hbl-website.vercel.app" },
+              { src: "/pixelpic.png", href: "https://example4.com" },
+              { src: "/marketplace.png", href: "/hackbeyond.png" },
+              { src: "/anonxpose.png", href: "/jayam.png" },
+            ];
+            return (
+              <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {projects.map((project, i) => (
+                    <motion.a
+                      key={i}
+                      href={project.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      whileHover={{ scale: 1.03 }}
+                      transition={{ duration: 0.5, delay: i * 0.1 }}
+                      className="relative overflow-hidden rounded-xl shadow-lg bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 block"
+                    >
+                      <Image
+                        src={project.src}
+                        alt={`Web project ${i + 1}`}
+                        width={600}
+                        height={400}
+                        className="w-full h-auto object-cover"
+                      />
+                      <motion.div
+                        className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0"
+                        whileHover={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <span className="text-white text-lg font-medium">View Project</span>
+                      </motion.div>
+                    </motion.a>
+                  ))}
+                </div>
+                <div className="flex justify-center mt-8">
+                  <UIButton />
+                </div>
+              </>
+            );
+          })()}
         </div>
+      </motion.section>
+
+        {/* Tech Stack */}
+        {/* Responsive Tech Stack Loop Section */}
+        <section className="w-full py-12 sm:py-16 md:py-20 bg-transparent flex flex-col items-center justify-center">
+          <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-8 text-center">Powered by Modern Technology</h3>
+          <div className="w-full max-w-6xl px-2 sm:px-6 flex items-center justify-center">
+            <div className="w-full" style={{ minHeight: '64px', position: 'relative', overflow: 'hidden' }}>
+              <LogoLoop
+                logos={techLogos}
+                speed={120}
+                direction="left"
+                logoHeight={48}
+                gap={40}
+                pauseOnHover
+                scaleOnHover
+                fadeOut
+                fadeOutColor="#ffffff"
+                ariaLabel="Technology partners"
+              />
+            </div>
+          </div>
+        </section>
         <motion.div
           className="mb-20"
           initial={{ opacity: 0, y: 50 }}
@@ -717,21 +793,7 @@ function WebsiteCreationStudio() {
             <p className="text-gray-600 dark:text-gray-300 text-lg">We use the latest and most reliable technologies</p>
           </div> */}
 
-          {/* <div className="flex flex-wrap justify-center gap-6">
-            {techStack.map((tech, index) => (
-              <motion.div
-                key={tech.name}
-                className="flex items-center space-x-3 px-6 py-4 bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-500 hover:shadow-lg transition-all"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-              >
-                <span className="text-2xl">{tech.icon}</span>
-                <span className={`font-semibold ${tech.color}`}>{tech.name}</span>
-              </motion.div>
-            ))}
-          </div> */}
+          {/*  */}
         </motion.div>
 
         {/* Call to Action */}
@@ -773,17 +835,17 @@ function WebsiteCreationStudio() {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-full shadow-lg">
+                  <UIButton className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-full shadow-lg">
                     🚀 Start Your Website Project
-                  </Button>
+                  </UIButton>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button
+                  <UIButton
                     variant="outline"
                     className="border-blue-500 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/50 px-8 py-4 text-lg font-semibold rounded-full"
                   >
                     💬 Get Free Strategy Call
-                  </Button>
+                  </UIButton>
                 </motion.div>
               </div>
 
@@ -1180,9 +1242,9 @@ function EnhancedMobileNav() {
                 transition={{ delay: menuItems.length * 0.1 }}
                 className="pt-4 border-t border-gray-100 dark:border-gray-800 w-full flex justify-center"
               >
-                <Button className="w-full max-w-xs bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white">
+                <UIButton className="w-full max-w-xs bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white">
                   Get Started
-                </Button>
+                </UIButton>
               </motion.div>
             </nav>
           </motion.div>
@@ -1323,12 +1385,12 @@ export default function Wave3Landing() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Button
+                  <UIButton
                     size="sm"
                     className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-full shadow-lg text-xs sm:text-sm px-3 sm:px-4"
                   >
                     Get Started
-                  </Button>
+                  </UIButton>
                 </motion.div>
               </div>
 
@@ -1399,18 +1461,18 @@ export default function Wave3Landing() {
                     transition={{ duration: 0.6, delay: 0.4 }}
                   >
                     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                      <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-4 sm:px-6 py-2 sm:py-3 group shadow-lg text-sm sm:text-base">
+                      <UIButton className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-4 sm:px-6 py-2 sm:py-3 group shadow-lg text-sm sm:text-base">
                         Start Project
                         <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4 group-hover:translate-x-1 transition-transform" />
-                      </Button>
+                      </UIButton>
                     </motion.div>
                     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                      <Button
+                      <UIButton
                         variant="outline"
                         className="border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-950/50 hover:border-blue-300 dark:hover:border-blue-500 hover:text-blue-700 dark:hover:text-blue-400 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base"
                       >
                         View Work
-                      </Button>
+                      </UIButton>
                     </motion.div>
                   </motion.div>
 
@@ -1825,7 +1887,7 @@ Pareekshith P - CTO & Co-Founder                  </p>
                   <span className="text-gray-500 dark:text-gray-400 text-sm">© 2024 Wave3. All rights reserved.</span>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button
+                  <UIButton
                     variant="outline"
                     size="sm"
                     className="border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-300 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/50"
@@ -1833,7 +1895,7 @@ Pareekshith P - CTO & Co-Founder                  </p>
                   >
                     <ArrowUp className="h-3 w-3 mr-2" />
                     Top
-                  </Button>
+                  </UIButton>
                 </motion.div>
               </div>
             </div>
@@ -1849,10 +1911,10 @@ Pareekshith P - CTO & Co-Founder                  </p>
           whileHover={{ scale: 1.1, y: -5 }}
           whileTap={{ scale: 0.9 }}
         >
-          <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 rounded-full shadow-2xl shadow-blue-500/25 text-sm sm:text-base px-3 sm:px-4 py-2 sm:py-3">
+          <UIButton className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 rounded-full shadow-2xl shadow-blue-500/25 text-sm sm:text-base px-3 sm:px-4 py-2 sm:py-3">
             <Sparkles className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
             Get your website now!
-          </Button>
+          </UIButton>
         </motion.div>
       </div>
     </>
