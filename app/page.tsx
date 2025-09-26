@@ -10,7 +10,7 @@ import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/s
     { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
   ];
 import TiltedCard from "./TiltedCard";
-
+import { Globe } from "@/components/ui/globe";
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { Button as UIButton } from "@/components/ui/button"
@@ -361,121 +361,7 @@ function WebsiteCreationStudio() {
         </motion.div>
 
         {/* Interactive Building Process */}
-        <motion.div
-          className="mb-20"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Watch Us Build Your Website</h3>
-            <motion.button
-              onClick={() => setIsBuilding(!isBuilding)}
-              className={`px-8 py-4 rounded-full font-semibold text-lg transition-all ${
-                isBuilding
-                  ? "bg-gradient-to-r from-red-500 to-pink-500 text-white shadow-lg"
-                  : "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:shadow-xl"
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {isBuilding ? "⏸️ Pause Building" : "▶️ Start Building"}
-            </motion.button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {buildingSteps.map((step, index) => (
-              <motion.div
-                key={step.id}
-                className={`relative p-6 rounded-2xl border-2 transition-all duration-500 ${
-                  buildingStep === index && isBuilding
-                    ? `bg-gradient-to-br ${step.color} text-white border-transparent shadow-2xl scale-105`
-                    : "bg-white border-gray-200 hover:border-blue-300"
-                }`}
-                whileHover={{ y: -5, scale: 1.02 }}
-                animate={
-                  buildingStep === index && isBuilding
-                    ? {
-                        boxShadow: [
-                          "0 0 30px rgba(59, 130, 246, 0.5)",
-                          "0 0 50px rgba(59, 130, 246, 0.7)",
-                          "0 0 30px rgba(59, 130, 246, 0.5)",
-                        ],
-                      }
-                    : {}
-                }
-                transition={{ duration: 0.8 }}
-              >
-                <motion.div
-                  className="text-4xl mb-4 text-center"
-                  animate={
-                    buildingStep === index && isBuilding
-                      ? { scale: [1, 1.4, 1], rotate: [0, 15, -15, 0] }
-                      : { scale: 1, rotate: 0 }
-                  }
-                  transition={{ duration: 0.6 }}
-                >
-                  {step.icon}
-                </motion.div>
-                <h4
-                  className={`text-xl font-bold mb-2 text-center ${
-                    buildingStep === index && isBuilding ? "text-white" : "text-gray-900"
-                  }`}
-                >
-                  {step.title}
-                </h4>
-                <p
-                  className={`text-center ${buildingStep === index && isBuilding ? "text-white/90" : "text-gray-600"}`}
-                >
-                  {step.description}
-                </p>
-
-                {/* Building animation */}
-                {buildingStep === index && isBuilding && (
-                  <motion.div
-                    className="absolute inset-0 rounded-2xl overflow-hidden"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                  >
-                    {[...Array(6)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        className="absolute w-2 h-2 bg-white/30 rounded-full"
-                        style={{
-                          left: `${20 + i * 15}%`,
-                          top: `${30 + (i % 3) * 20}%`,
-                        }}
-                        animate={{
-                          y: [0, -20, 0],
-                          opacity: [0.3, 1, 0.3],
-                          scale: [0.5, 1.2, 0.5],
-                        }}
-                        transition={{
-                          duration: 1,
-                          repeat: Number.POSITIVE_INFINITY,
-                          delay: i * 0.1,
-                        }}
-                      />
-                    ))}
-                  </motion.div>
-                )}
-
-                {/* Progress line */}
-                {index < buildingSteps.length - 1 && (
-                  <motion.div
-                    className="absolute -right-3 top-1/2 w-6 h-0.5 bg-gradient-to-r from-blue-400 to-indigo-400 hidden md:block"
-                    initial={{ scaleX: 0 }}
-                    animate={{
-                      scaleX: isBuilding && buildingStep > index ? 1 : 0,
-                    }}
-                    transition={{ duration: 0.5 }}
-                  />
-                )}
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
+        
         {/* Website Types Showcase */}
         <motion.div
           className="mb-20"
@@ -1404,7 +1290,7 @@ export default function Wave3Landing() {
             style={{ opacity: heroOpacity, scale: heroScale }}
           >
             <div className="container mx-auto max-w-7xl">
-              <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center pt-8 lg:pt-24">
                 {/* Left Content */}
                 <motion.div
                   className="text-center lg:text-left"
@@ -1503,30 +1389,19 @@ export default function Wave3Landing() {
                   </motion.div>
                 </motion.div>
 
-                {/* Right Content - Enhanced 3D Scene */}
+                {/* Globe visual element in hero section */}
                 <motion.div
-                  className="h-[300px] sm:h-[400px] lg:h-[500px] order-first lg:order-last"
+                  className="w-full flex items-center justify-center lg:justify-end"
                   initial={{ opacity: 0, x: 30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
                   whileHover={{ scale: 1.02 }}
                 >
-                  <Suspense
-                    fallback={
-                      <div className="w-full h-full bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl animate-pulse flex items-center justify-center border border-blue-100">
-                        <div className="text-blue-400 text-sm">Loading 3D Scene...</div>
-                      </div>
-                    }
-                  >
-                    <iframe
-                      src="https://my.spline.design/tubes-JoDD0AQyTJJY4kJ5kgRUF6fA/"
-                      frameBorder="0"
-                      width="100%"
-                      height="100%"
-                      style={{ background: "transparent" }}
-                      
-                    />
-                  </Suspense>
+                  <div className="relative flex items-center justify-center lg:justify-end w-full">
+                    <div className="z-10 w-[220px] h-[220px] sm:w-[320px] sm:h-[320px] lg:w-[480px] lg:h-[480px] xl:w-[540px] xl:h-[540px] 2xl:w-[600px] 2xl:h-[600px] flex items-center justify-center">
+                      <Globe />
+                    </div>
+                  </div>
                 </motion.div>
               </div>
             </div>
@@ -1644,6 +1519,8 @@ export default function Wave3Landing() {
           </section>
 
           {/* Enhanced Work Section */}
+          {/* MagicBento visual effect above Selected Work section */}
+
           <section className="py-16 sm:py-24 px-4 sm:px-6" id="work">
             <div className="container mx-auto max-w-6xl">
               <motion.div
@@ -1770,6 +1647,8 @@ Pareekshith P - CTO & Co-Founder                  </p>
             </div>
               </motion.div>
 
+
+
               {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
                   {
@@ -1799,6 +1678,10 @@ Pareekshith P - CTO & Co-Founder                  </p>
               </div> */}
             </div>
           </section>
+
+
+
+{/* <Globe /> */}
 
           {/* Contact Info Section */}
           <section className="py-16 sm:py-24 px-4 sm:px-6" id="contact-info">
