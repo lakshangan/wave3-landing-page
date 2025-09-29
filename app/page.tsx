@@ -601,10 +601,10 @@ function WebsiteCreationStudio() {
             const projects = [
               { src: "/bayan.png", href: "https://banyangrowtokentest.vercel.app/" },
               { src: "/jayam.png", href: "https://jayaminstitute.vercel.app/" },
+              { src: "/kirlosker.png", href: "https://kirlo-portfoli.vercel.app/" },              
               { src: "/hackbeyondlimitsv1.png", href: "hbl-website.vercel.app" },
-              { src: "/pixelpic.png", href: "https://example4.com" },
-              { src: "/marketplace.png", href: "/hackbeyond.png" },
-              { src: "/anonxpose.png", href: "/jayam.png" },
+              { src: "/pixelpic.png", href: "https://pixcelpic.vercel.app/" },
+              { src: "/anonxpose.png", href: "anonxpose.com" },
             ];
             return (
               <>
@@ -639,7 +639,13 @@ function WebsiteCreationStudio() {
                   ))}
                 </div>
                 <div className="flex justify-center mt-8">
-                  <UIButton />
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <a href="#work">
+                      <UIButton className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-3 rounded-full shadow-lg text-lg font-semibold">
+                        See More Projects
+                      </UIButton>
+                    </a>
+                  </motion.div>
                 </div>
               </>
             );
@@ -1195,6 +1201,8 @@ export default function Wave3Landing() {
   const [loading, setLoading] = useState(true)
   const { scrollYProgress } = useScroll()
   const isMobile = useMobile()
+  // Mobile scroll progress
+  const mobileScaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 })
 
   // Scroll-based animations
   const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0])
@@ -1214,17 +1222,40 @@ export default function Wave3Landing() {
 
   return (
     <>
-      <AnimatePresence>{loading && <EnhancedPreloader onComplete={() => setLoading(false)} />}</AnimatePresence>
+      {/* Mobile loading animation */}
+      <AnimatePresence>
+        {loading && isMobile && (
+          <motion.div
+            className="fixed inset-0 bg-white dark:bg-gray-950 z-[100] flex flex-col items-center justify-center md:hidden"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
+          >
+            <Image src="/wave3-logo.png" alt="Wave3 Logo" width={100} height={40} className="mb-6" />
+            <div className="w-40 mb-2">
+              <Progress value={loading ? 80 : 100} className="h-1 bg-gray-200 dark:bg-gray-800" indicatorClassName="bg-gradient-to-r from-blue-500 to-indigo-600" />
+            </div>
+            <span className="text-xs text-gray-500 dark:text-gray-400">{loading ? 'Loading...' : '100%'}</span>
+          </motion.div>
+        )}
+        {loading && !isMobile && <EnhancedPreloader onComplete={() => setLoading(false)} />}
+      </AnimatePresence>
 
-  <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 overflow-x-hidden relative">
+      <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 overflow-x-hidden relative">
         {/* Enhanced Background */}
         <EnhancedBackground />
 
-        {/* Mouse Follower */}
+        {/* Mouse Follower (desktop only) */}
         {!isMobile && <MouseFollower />}
 
-        {/* Enhanced Scroll Progress */}
-        <EnhancedScrollProgress />
+        {/* Scroll Progress Bar */}
+        {!isMobile && <EnhancedScrollProgress />}
+        {isMobile && (
+          <motion.div
+            className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 z-[99] origin-left md:hidden"
+            style={{ scaleX: mobileScaleX }}
+          />
+        )}
 
         {/* Content */}
         <div className="relative z-20">
@@ -1240,7 +1271,10 @@ export default function Wave3Landing() {
               whileHover={{ scale: 1.01 }}
             >
               <motion.div className="flex items-center" whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
-                <Image src="/wave3-logo.png" alt="Wave3" width={200} height={72} className="h-16 sm:h-20 w-auto" />
+                <div className="flex items-center">
+                  <Image src="/wave3-logo.png" alt="Wave3" width={200} height={72} className="h-16 sm:h-20 w-auto dark:hidden" />
+                  <Image src="/wave3-logowhite.png" alt="Wave3 White" width={200} height={72} className="h-16 sm:h-20 w-auto hidden dark:block" />
+                </div>
               </motion.div>
                
               <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
@@ -1353,12 +1387,14 @@ export default function Wave3Landing() {
                       </UIButton>
                     </motion.div>
                     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                      <UIButton
+                    <a href="#work">
+                    <UIButton
                         variant="outline"
                         className="border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-950/50 hover:border-blue-300 dark:hover:border-blue-500 hover:text-blue-700 dark:hover:text-blue-400 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base"
                       >
                         View Work
                       </UIButton>
+                      </a> 
                     </motion.div>
                   </motion.div>
 
@@ -1370,9 +1406,9 @@ export default function Wave3Landing() {
                     transition={{ duration: 0.6, delay: 0.5 }}
                   >
                     {[
-                      { number: 150, suffix: "+", label: "Projects", color: "text-blue-600 dark:text-blue-400" },
+                      { number: 15, suffix: "+", label: "Projects", color: "text-blue-600 dark:text-blue-400" },
                       { number: 98, suffix: "%", label: "Satisfaction", color: "text-indigo-600 dark:text-indigo-400" },
-                      { number: 5, suffix: "+", label: "Years", color: "text-purple-600 dark:text-purple-400" },
+                      { number: 3, suffix: "+", label: "Years in Dev", color: "text-purple-600 dark:text-purple-400" },
                     ].map((stat, index) => (
                       <motion.div
                         key={index}
