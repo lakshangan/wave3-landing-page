@@ -75,13 +75,14 @@ const useMobile = () => {
   return isMobile
 }
 
-// Enhanced Preloader with subtle color
+// Enhanced Preloader with subtle color and responsive logo for light/dark mode
 function EnhancedPreloader({ onComplete }: { onComplete: () => void }) {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (progress < 100) {
+    let timer: NodeJS.Timeout | number;
+    if (progress < 100) {
+      timer = setTimeout(() => {
         setProgress((prev) => {
           const increment = Math.random() * 15
           const newProgress = Math.min(prev + increment, 100)
@@ -90,15 +91,14 @@ function EnhancedPreloader({ onComplete }: { onComplete: () => void }) {
           }
           return newProgress
         })
-      }
-    }, 80)
-
+      }, 80)
+    }
     return () => clearTimeout(timer)
   }, [progress, onComplete])
 
   return (
     <motion.div
-      className="fixed inset-0 bg-white z-[100] flex flex-col items-center justify-center"
+      className="fixed inset-0 bg-white dark:bg-gray-950 z-[100] flex flex-col items-center justify-center"
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -109,19 +109,20 @@ function EnhancedPreloader({ onComplete }: { onComplete: () => void }) {
         transition={{ delay: 0.1 }}
         className="mb-8"
       >
-        <Image src="/wave3-logo.png" alt="Wave3 Logo" width={120} height={48} className="h-12 w-auto" />
+        <Image src="/wave3-logo.png" alt="Wave3 Logo" width={120} height={48} className="h-12 w-auto dark:hidden" />
+        <Image src="/wave3-logowhite.png" alt="Wave3 White Logo" width={120} height={48} className="h-12 w-auto hidden dark:block" />
       </motion.div>
 
       <div className="w-48 mb-4">
         <Progress
           value={progress}
-          className="h-0.5 bg-gray-100"
+          className="h-0.5 bg-gray-100 dark:bg-gray-800"
           indicatorClassName="bg-gradient-to-r from-blue-500 to-indigo-600"
         />
       </div>
 
       <motion.p
-        className="text-gray-500 text-sm"
+        className="text-gray-500 dark:text-gray-400 text-sm"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
@@ -1222,23 +1223,11 @@ export default function Wave3Landing() {
 
   return (
     <>
-      {/* Mobile loading animation */}
+      {/* Preloader for all devices */}
       <AnimatePresence>
-        {loading && isMobile && (
-          <motion.div
-            className="fixed inset-0 bg-white dark:bg-gray-950 z-[100] flex flex-col items-center justify-center md:hidden"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-          >
-            <Image src="/wave3-logo.png" alt="Wave3 Logo" width={100} height={40} className="mb-6" />
-            <div className="w-40 mb-2">
-              <Progress value={loading ? 80 : 100} className="h-1 bg-gray-200 dark:bg-gray-800" indicatorClassName="bg-gradient-to-r from-blue-500 to-indigo-600" />
-            </div>
-            <span className="text-xs text-gray-500 dark:text-gray-400">{loading ? 'Loading...' : '100%'}</span>
-          </motion.div>
+        {loading && (
+          <EnhancedPreloader onComplete={() => setLoading(false)} />
         )}
-        {loading && !isMobile && <EnhancedPreloader onComplete={() => setLoading(false)} />}
       </AnimatePresence>
 
       <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 overflow-x-hidden relative">
@@ -1634,53 +1623,9 @@ export default function Wave3Landing() {
                 transition={{ duration: 0.6 }}
                 className="text-center mb-12 sm:mb-16"
               >
-                          <motion.h2 className="text-2xl sm:text-3xl font-light mb-4 text-black dark:text-white" whileHover={{ scale: 1.02 }}>
-            The team
-          </motion.h2>
-          <motion.p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base" whileHover={{ scale: 1.01 }}>
-            People behind Wave3
-          </motion.p>
-            <div className="flex flex-col md:flex-row justify-center items-center gap-8 my-8">
-              {/* Demo TiltedCard for Kendrick Lamar - GNX */}
-              <TiltedCard
-                imageSrc="/ansar.png"
-                altText="Ansar Hussain A - CEO & Founder"
-                captionText="Ansar "
-                containerHeight="300px"
-                containerWidth="300px"
-                imageHeight="300px"
-                imageWidth="300px"
-                rotateAmplitude={12}
-                scaleOnHover={1.2}
-                showMobileWarning={false}
-                showTooltip={true}
-                displayOverlayContent={true}
-                overlayContent={
-                  <p className="tilted-card-demo-text">
-                    Ansar Hussain A - CEO & Founder
-                  </p>
-                }
-              />
-              {/* Second TiltedCard for another album */}
-              <TiltedCard
-                imageSrc="/pareekshit.png"
-                altText="Pareekshith P - CTO & Co-Founder"
-                captionText="Pareekshith P - CTO & Co-Founder"
-                containerHeight="300px"
-                containerWidth="300px"
-                imageHeight="300px"
-                imageWidth="300px"
-                rotateAmplitude={10}
-                scaleOnHover={1.15}
-                showMobileWarning={false}
-                showTooltip={true}
-                displayOverlayContent={true}
-                overlayContent={
-                  <p className="tilted-card-demo-text">
-Pareekshith P - CTO & Co-Founder                  </p>
-                }
-              />
-            </div>
+                  
+          
+           
               </motion.div>
 
 
